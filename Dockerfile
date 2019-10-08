@@ -1,7 +1,7 @@
 FROM opensciencegrid/software-base:fresh
 
-RUN yum install -y glideinwms-vofrontend-standalone && \
-    yum install -y install supervisor
+RUN yum -y install glideinwms-vofrontend-standalone && \
+    yum -y install supervisor
 
 RUN mkdir -p /var/log/supervisor
 
