@@ -1,11 +1,8 @@
 FROM opensciencegrid/software-base:fresh
 
-RUN yum -y install glideinwms-vofrontend-standalone && \
-    yum -y install supervisor
+RUN yum -y install glideinwms-vofrontend-standalone
 
-RUN mkdir -p /var/log/supervisor
-
-ADD supervisord.conf /etc/supervisord.conf
+ADD 10-gwms-fe.conf /etc/10-gwms-fe.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"] 
 
