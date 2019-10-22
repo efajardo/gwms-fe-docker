@@ -9,6 +9,7 @@ RUN yum -y install http://repo.opensciencegrid.org/osg/3.4/osg-3.4-el7-release-l
 
 RUN mkdir -p /var/log/supervisor
 
+ADD supervisord.conf /etc/
 ADD supervisord.conf /etc/supervisord.conf/
 ADD 10-gwms-fe.conf /etc/supervisord.d/
 
