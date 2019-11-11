@@ -1,4 +1,4 @@
-FROM opensciencegrid/software-base:fresh
+FROM opensciencegrid/software-base:20190912-2036
 
 RUN yum -y install cronie && \
     yum -y install supervisor && \
