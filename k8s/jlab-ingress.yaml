@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jlab-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  namespace: osg-frontends
+spec:
+  rules:
+  - host: osg-frontends.nautlius.optiputer.net
+    http:
+      paths:
+      - backend:
+          serviceName: jlab-service
+          servicePort: web

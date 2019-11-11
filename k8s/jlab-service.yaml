@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jlab-service
+  namespace: osg-frontends
+spec:
+  selector:
+    k8s-app: jlab-frontend
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 8008
+    protocol: TCP
+  - name: collect
+    port: 6343
+    protocol: UDP
+
