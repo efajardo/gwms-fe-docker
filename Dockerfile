@@ -1,4 +1,4 @@
-FROM opensciencegrid/software-base:latest
+FROM opensciencegrid/software-base:fresh
 
 RUN yum -y install cronie && \
     yum -y install supervisor && \
@@ -8,6 +8,5 @@ RUN yum -y install cronie && \
 RUN mkdir -p /var/log/supervisor
 
 ADD 10-gwms-fe.conf /etc/supervisord.d/
-
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"] 
