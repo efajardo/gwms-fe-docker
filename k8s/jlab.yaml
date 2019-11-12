@@ -18,13 +18,15 @@ spec:
         - mountPath: /etc/grid-security/gwms-frontend
           name: proxycerts-secret
           readOnly: true
-        - mountPath: /etc/grid-security/gwms-frontend
+        - mountPath: /etc/grid-security/voms
           name: vomscerts-secret
           readOnly: true
+        - mountPath: /etc/gwms-frontend/
+          name: proxies-config
         resources:
           limits:
             cpu: 4
-            memory: 1Gi
+            memory: 3Gi
           requests:
             cpu: 3
             memory: 1Gi
@@ -36,6 +38,11 @@ spec:
         - name: proxycerts-secret
           secret:
             secretName: proxycerts
+            defaultMode: 0600      #Right File Permissions so can only be read by one node.
         - name:  vomscerts-secret
           secret:
             secretName: vomscerts
+            defaultMode: 0600
+        - name: proxies-config
+          configMap:
+             name: proxies
