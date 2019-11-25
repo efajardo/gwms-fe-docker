@@ -9,4 +9,4 @@ RUN mkdir -p /var/log/supervisor
 
 ADD 10-gwms-fe.conf /etc/supervisord.d/
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"] 
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.d/10-gwms-fe.conf"] 

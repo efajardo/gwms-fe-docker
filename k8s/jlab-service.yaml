@@ -9,9 +9,6 @@ spec:
   type: ClusterIP
   ports:
   - name: web
-    port: 8008
+    port: 80
+    targetPort: 80
     protocol: TCP
-  - name: collect
-    port: 6343
-    protocol: UDP
-

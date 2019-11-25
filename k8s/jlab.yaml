@@ -12,6 +12,9 @@ spec:
       containers:
       - name: jlab-frontend
         image: aaarora/gwms-fe-docker:latest
+        ports:
+        - containerPort: 80
+        command: 
         volumeMounts:
         - mountPath: /var/lib/gwms-frontend/web-area
           name: jlab-storage
@@ -23,6 +26,8 @@ spec:
           readOnly: true
         - mountPath: /etc/gwms-frontend/
           name: proxies-config
+        - mountPath: /etc/gwms-frontend/
+          name: frontendxml
         resources:
           limits:
             cpu: 4
@@ -46,3 +51,6 @@ spec:
         - name: proxies-config
           configMap:
              name: proxies
+        - name: frontendxml
+          configMap:
+             name: frontendxml
