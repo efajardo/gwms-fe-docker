@@ -1,0 +1,85 @@
+Name:               jlab-frontend-7b85c7dcd-kvtqk
+Namespace:          osg-frontends
+Priority:           0
+PriorityClassName:  <none>
+Node:               nrp-c4.nysernet.org/199.109.22.39
+Start Time:         Tue, 26 Nov 2019 13:52:00 -0800
+Labels:             k8s-app=jlab-frontend
+                    pod-template-hash=7b85c7dcd
+Annotations:        cni.projectcalico.org/podIP: 10.244.154.130/32
+                    kubernetes.io/psp: nautilususerpolicy
+Status:             Running
+IP:                 10.244.154.130
+Controlled By:      ReplicaSet/jlab-frontend-7b85c7dcd
+Containers:
+  jlab-frontend:
+    Container ID:   docker://e450f4545664373dd6ca123564b0b593627a7bb7402479ea95e7639ceceb740d
+    Image:          aaarora/gwms-fe-docker:latest
+    Image ID:       docker-pullable://aaarora/gwms-fe-docker@sha256:da661256c3ae63fa084b87c9c63f66249b2311fe09f88c86377e90d9cecf28e4
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    126
+      Started:      Tue, 26 Nov 2019 13:56:00 -0800
+      Finished:     Tue, 26 Nov 2019 13:56:00 -0800
+    Ready:          False
+    Restart Count:  5
+    Limits:
+      cpu:     4
+      memory:  3Gi
+    Requests:
+      cpu:     3
+      memory:  1Gi
+    Environment:
+      NVIDIA_VISIBLE_DEVICES:  none
+    Mounts:
+      /etc/grid-security/gwms-frontend from proxycerts-secret (ro)
+      /etc/grid-security/voms from vomscerts-secret (ro)
+      /etc/gwms-frontend/ from proxies-config (rw)
+      /var/lib/gwms-frontend/web-area from jlab-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-wrllx (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  jlab-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  jlab-storage
+    ReadOnly:   false
+  proxycerts-secret:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  proxycerts
+    Optional:    false
+  vomscerts-secret:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  vomscerts
+    Optional:    false
+  proxies-config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      proxies
+    Optional:  false
+  default-token-wrllx:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-wrllx
+    Optional:    false
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     nautilus.io/chase-ci:NoSchedule
+                 node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason                  Age                    From                          Message
+  ----     ------                  ----                   ----                          -------
+  Normal   Scheduled               <unknown>              default-scheduler             Successfully assigned osg-frontends/jlab-frontend-7b85c7dcd-kvtqk to nrp-c4.nysernet.org
+  Normal   SuccessfulAttachVolume  4m38s                  attachdetach-controller       AttachVolume.Attach succeeded for volume "pvc-1742b39b-1049-40ff-ba51-378eaf22b886"
+  Normal   Pulling                 2m58s (x4 over 4m4s)   kubelet, nrp-c4.nysernet.org  Pulling image "aaarora/gwms-fe-docker:latest"
+  Normal   Pulled                  2m58s (x4 over 3m58s)  kubelet, nrp-c4.nysernet.org  Successfully pulled image "aaarora/gwms-fe-docker:latest"
+  Normal   Created                 2m55s (x4 over 3m54s)  kubelet, nrp-c4.nysernet.org  Created container jlab-frontend
+  Normal   Started                 2m54s (x4 over 3m54s)  kubelet, nrp-c4.nysernet.org  Started container jlab-frontend
+  Warning  BackOff                 2m24s (x9 over 3m47s)  kubelet, nrp-c4.nysernet.org  Back-off restarting failed container
