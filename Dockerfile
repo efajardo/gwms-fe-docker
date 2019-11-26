@@ -11,4 +11,4 @@ ADD supervisor_startup.sh /usr/local/sbin/osg-frontends-init
 ADD 10-gwms-fe.conf /etc/supervisord.d/
 ADD image-config.d/* /etc/osg-frontends/image-config.d/
 
-CMD ["/usr/local/sbin/osg-frontends-init/supervisord_startup.sh"] 
+CMD ["/usr/local/sbin/osg-frontends-init/supervisor_startup.sh"] 
