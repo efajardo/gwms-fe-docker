@@ -1,9 +1,12 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jlab-frontend
   namespace: osg-frontends
 spec:
+  selector:
+    matchLabels:
+      k8s-app: jlab-frontend
   template:
     metadata:
       labels:
@@ -13,8 +16,7 @@ spec:
       - name: jlab-frontend
         image: aaarora/gwms-fe-docker:latest
         ports:
-        - containerPort: 80
-        command: 
+        - containerPort: 80 
         volumeMounts:
         - mountPath: /var/lib/gwms-frontend/web-area
           name: jlab-storage
@@ -26,8 +28,6 @@ spec:
           readOnly: true
         - mountPath: /etc/gwms-frontend/
           name: proxies-config
-        - mountPath: /etc/gwms-frontend/
-          name: frontendxml
         resources:
           limits:
             cpu: 4
@@ -51,6 +51,3 @@ spec:
         - name: proxies-config
           configMap:
              name: proxies
-        - name: frontendxml
-          configMap:
-             name: frontendxml
