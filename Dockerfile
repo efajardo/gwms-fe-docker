@@ -7,6 +7,8 @@ RUN yum -y install cronie && \
 
 RUN mkdir -p /var/log/supervisor
 
+ADD supervisord_startup.sh /usr/local/sbin/osg-frontends-init
 ADD 10-gwms-fe.conf /etc/supervisord.d/
+ADD image-config.d/* /etc/osg-frontends/image-config.d/
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.d/10-gwms-fe.conf"] 
+CMD ["/usr/local/sbin/osg-frontends-init/supervisord_startup.sh"] 
