@@ -1,3 +1,3 @@
 #!/bin/bash
 
-chown frontend etc/gwms-frontend/frontend.xml
+chown frontend /etc/gwms-frontend/frontend.xml

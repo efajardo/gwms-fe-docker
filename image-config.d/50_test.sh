@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mkdir etc/testdir
+touch /etc/osg/testFile.txt
