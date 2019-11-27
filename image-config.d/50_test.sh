@@ -1,3 +1,3 @@
 #!/bin/bash
 
-touch /etc/osg/testFile.txt
+touch /etc/testFile.txt
