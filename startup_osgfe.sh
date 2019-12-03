@@ -4,5 +4,5 @@
 for x in /etc/osg/image-config.d/*.sh; do source "$x"; done
 
 # Now we can actually start the supervisor
-exec /usr/bin/supervisord -c /etc/10-gwms-fe.conf
+exec /usr/bin/supervisord -c /etc/supervisord.d/10-gwms-fe.conf
 
