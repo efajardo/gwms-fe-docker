@@ -9,6 +9,7 @@ RUN mkdir -p /var/log/supervisor
 
 ADD 10-gwms-fe.conf /etc/supervisord.d/
 ADD image-config.d/* /etc/osg/image-config.d/
+ADD startup_osgfe.sh /etc/osg/startup_osgfe.sh/
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.d/10-gwms-fe.conf"] 
+CMD ["/etc/osg/startup_osgfe.sh"] 
 

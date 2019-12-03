@@ -29,8 +29,8 @@ spec:
         - mountPath: /etc/gwms-frontend/proxies.ini
           subPath: proxies.ini
           name: proxies-config
-        - mountPath: /etc/gwms-frontend/frontend.xml
-          subPath: frontend.xml
+        - mountPath: /etc/gwms-frontend/frontend.xml.k8s
+          subPath: frontend.xml.k8s
           name: fexml-config
         resources:
           limits:
