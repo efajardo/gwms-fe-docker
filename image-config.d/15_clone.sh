@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git clone https://github.com/opensciencegrid/osg-flock.git /opt/
+git clone https://github.com/opensciencegrid/osg-flock.git /opt/osg-flock/
