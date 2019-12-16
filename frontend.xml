@@ -1,0 +1,130 @@
+<frontend advertise_delay="5" advertise_with_multiple="True" advertise_with_tcp="True" downtimes_file="frontenddowntime" frontend_monitor_index_page="False" frontend_name="JLabVO-1_0" frontend_versioning="False" group_parallel_workers="2" loop_delay="60" restart_attempts="3" restart_interval="1800">
+   <config ignore_down_entries="False">
+      <idle_vms_total curb="200" max="1000"/>
+      <idle_vms_total_global curb="200" max="1000"/>
+      <running_glideins_total curb="90000" max="100000"/>
+      <running_glideins_total_global curb="90000" max="100000"/>
+   </config>
+   <high_availability check_interval="300" enabled="False">
+      <ha_frontends>
+      </ha_frontends>
+   </high_availability>
+   <log_retention>
+      <process_logs>
+         <process_log backup_count="50" compression="" extension="info" max_days="7.0" max_mbytes="10.0" min_days="3.0" msg_types="INFO"/>
+         <process_log backup_count="50" compression="" extension="err" max_days="7.0" max_mbytes="10.0" min_days="3.0" msg_types="DEBUG,ERR,WARN,EXCEPTION"/>
+      </process_logs>
+   </log_retention>
+   <match match_expr='(job.get("RequestCpus",1)&lt;=glidein["attrs"]["GLIDEIN_CPUS"]) and ((job.get("DESIRED_Sites","nosite")=="nosite") or (glidein["attrs"]["GLIDEIN_Site"] in job.get("DESIRED_Sites","nosite").split(","))) and (glidein["attrs"]["GLIDEIN_MaxMemMBs"]==0 or job.get("RequestMemory", 1024)&lt;=glidein["attrs"]["GLIDEIN_MaxMemMBs"]) and (job.get("UNDESIRED_Sites","nosite")=="nosite" or (glidein["attrs"]["GLIDEIN_Site"] not in job.get("UNDESIRED_Sites","").split(",")))' start_expr='((DESIRED_Sites=?=undefined) || stringListMember(GLIDEIN_Site,DESIRED_Sites,","))&amp;&amp;(UNDESIRED_Sites=?=undefined || !stringListMember(GLIDEIN_Site,UNDESIRED_Sites,","))'>
+      <factory query_expr='true'>
+         <match_attrs>
+            <match_attr name="GLIDEIN_CPUS" type="int"/>
+            <match_attr name="GLIDEIN_MaxMemMBs" type="int"/>
+            <match_attr name="GLIDEIN_Site" type="string"/>
+            <match_attr name="UNDESIRED_Sites" type="string"/>
+         </match_attrs>
+         <collectors>
+            <collector DN="/DC=org/DC=incommon/C=US/ST=WI/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" comment="Second OSG Factory" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="fejlab@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
+         </collectors>
+      </factory>
+      <job comment="Define job constraint and schedds globally for simplicity" query_expr="(JobUniverse==5)&amp;&amp;(GLIDEIN_Is_Monitor =!= TRUE)&amp;&amp;(JOB_Is_Monitor =!= TRUE)">
+         <match_attrs>
+            <match_attr name="DESIRED_Sites" type="string"/>
+            <match_attr name="RequestCpus" type="string"/>
+            <match_attr name="RequestMemory" type="int"/>
+         </match_attrs>
+         <schedds>
+            <schedd DN="/CN=scosg16.jlab.org" fullname="scosg16.jlab.org"/>
+         </schedds>
+      </job>
+   </match>
+   <monitor base_dir="/var/lib/gwms-frontend/web-area/monitor" flot_dir="/usr/share/javascriptrrd/flot" javascriptRRD_dir="/usr/share/javascriptrrd/js" jquery_dir="/usr/share/javascriptrrd/flot"/>
+   <monitor_footer display_txt="" href_link=""/>
+   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-jlab-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="jlab" sym_key="aes_256_cbc">
+      <credentials>
+      </credentials>
+   </security>
+   <stage base_dir="/var/lib/gwms-frontend/web-area/stage" use_symlink="True" web_base_url="http://jlab-frontend.nautilus.optiputer.net/vofrontend/stage"/>
+   <work base_dir="/var/lib/gwms-frontend/vofrontend" base_log_dir="/var/log/gwms-frontend"/>
+   <attrs>
+      <attr name="GLIDECLIENT_Rank" glidein_publish="False" job_publish="False" parameter="True" type="string" value="1"/>
+      <attr name="GLIDEIN_CLAIM_WORKLIFE" glidein_publish="False" job_publish="False" parameter="True" type="int" value="3600"/>
+      <attr name="GLIDEIN_Expose_Grid_Env" glidein_publish="True" job_publish="True" parameter="False" type="string" value="True"/>
+      <attr name="GLIDEIN_Glexec_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="NEVER"/>
+      <attr name="GLIDEIN_Job_Max_Time" glidein_publish="True" job_publish="False" parameter="True" type="int" value="10800"/>
+      <attr name="GLIDEIN_Max_Idle" glidein_publish="True" job_publish="False" parameter="True" type="int" value="2400"/>
+      <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
+      <attr name="STARTD_JOB_ATTRS" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="x509userproxysubject,x509UserProxyFQAN,x509UserProxyVOName,x509UserProxyEmail,x509UserProxyExpiration,ProjectName"/>
+      <attr name="USE_MATCH_AUTH" glidein_publish="False" job_publish="False" parameter="True" type="string" value="True"/>
+   </attrs>
+   <groups>
+     <group name="clas12" enabled="True">
+         <config ignore_down_entries="">
+            <glideins_removal margin="0" requests_tracking="False" type="NO" wait="0"/>
+            <idle_glideins_lifetime max="864000"/>
+            <idle_glideins_per_entry max="100" reserve="1"/>
+            <idle_vms_per_entry curb="400" max="500"/>
+            <idle_vms_total curb="2000" max="2400"/>
+            <processing_workers matchmakers="3"/>
+            <running_glideins_per_entry max="10000" min="0" relative_to_queue="5.15"/>
+            <running_glideins_total curb="90000" max="100000"/>
+         </config>
+         <match match_expr="True" start_expr='(TARGET.projectName =?= "CLAS12")'>
+            <factory query_expr='((stringListMember("CLAS12", GLIDEIN_Supported_VOs)))'>
+               <match_attrs>
+               </match_attrs>
+	       <collectors>
+	       </collectors>
+            </factory>
+            <job query_expr='(ProjectName =?= "CLAS12")'>
+               <match_attrs>
+               </match_attrs>
+               <schedds>
+               </schedds>
+            </job>
+         </match>
+         <security>
+            <credentials>
+	      <credential absfname="/etc/grid-security/pilot_clas12_proxy.proxy" security_class="frontend" trust_domain="grid" type="grid_proxy"/>
+            </credentials>
+         </security>
+         <attrs>
+            <attr name="SINGULARITY_IMAGES_DICT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="default:/cvmfs/singularity.opensciencegrid.org/markito3/gluex_docker_prod:latest,rhel7:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el7"/>
+	 </attrs>
+	    <files>
+            </files>
+      </group>
+   </groups>
+   <ccbs>
+   </ccbs>
+   <collectors>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=CT/L=Storrs/O=University of Connecticut/OU=Academic IT/CN=gremlin.phys.uconn.edu" group="default" node="gremlin.phys.uconn.edu:9618" secondary="False"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=CT/L=Storrs/O=University of Connecticut/OU=Academic IT/CN=gremlin.phys.uconn.edu" group="default" node="gremlin.phys.uconn.edu:9620-9640" secondary="True"/>
+   </collectors>
+   <files>
+      <file absfname="/opt/osg-flock/node-check/osgvo-node-validation" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/opt/osg-flock/node-check/crl-check" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/opt/osg-flock/node-check/osgvo-node-advertise" after_entry="True" after_group="False" const="True" executable="True" period="300" prefix="NOPREFIX" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/opt/osg-flock/node-check/osgvo-additional-htcondor-config" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/opt/osg-flock/node-check/osgvo-bench" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/opt/osg-flock/node-check/eic-data-attributes" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+      <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" after_group="False" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+   </files>
+</frontend>
