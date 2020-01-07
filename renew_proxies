@@ -1,0 +1,1 @@
+0 * * * * root /etc/osg/image-config.d/20_renew_proxies
