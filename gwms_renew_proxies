@@ -167,7 +167,7 @@ def voms_proxy_fake(proxy, vo_info):
     """ Create a valid proxy without contacting a VOMS Admin server. VOMS attributes are created from user config.
     Returns stdout, stderr, and return code of voms-proxy-fake
     """
-    cmd = ['voms-proxy-fake', '--debug', '-rfc',
+    cmd = ['voms-proxy-fake', '--debug',
            '-cert', proxy.cert,
            '-key', proxy.key,
            '-out', proxy.tmp_output_fd.name,
