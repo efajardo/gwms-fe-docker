@@ -13,7 +13,10 @@ spec:
         k8s-app: jlab-frontend
     spec:
       containers:
-      - name: jlab-frontend
+      - env:
+        - name: VO_POOL
+          value: "osg-jlab-1.t2.ucsd.edu" 
+        name: jlab-frontend
         image: aaarora/gwms-fe-docker:latest
         ports:
         - containerPort: 80 
