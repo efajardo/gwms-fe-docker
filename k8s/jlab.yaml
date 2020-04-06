@@ -4,6 +4,7 @@ metadata:
   name: jlab-frontend
   namespace: osg-frontends
 spec:
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: jlab-frontend
@@ -49,15 +50,15 @@ spec:
             claimName: jlab-storage
         - name: proxycerts-secret
           secret:
-            secretName: proxycerts
+            secretName: jlabproxycerts
             defaultMode: 0600      #Right File Permissions so can only be read by one node.
         - name:  vomscerts-secret
           secret:
-            secretName: vomscerts
+            secretName: jlabvomscerts
             defaultMode: 0600
         - name: proxies-config
           configMap:
-             name: proxies
+             name: jlab-proxies-config
         - name: fexml-config
           configMap:
-             name: fexml
+             name: jlab-fexml
