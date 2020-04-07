@@ -2,13 +2,10 @@
 
 ## Ingredients needed to containerize frontend:
 1. pilot_certs
-2. voms_certs
-3. frontend.xml
-4. proxies.ini
-5. frontend.conf
-6. image-config.d
-7. DockerFile 
-8. frontend_yaml files:
+1. voms_certs (if using voms proxy fake)
+1. frontend.xml
+1. proxies.ini
+1. frontend_yaml files:
 	- frontend.yaml
 	- service.yaml
 	- ingress.yaml
