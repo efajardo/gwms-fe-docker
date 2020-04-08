@@ -120,9 +120,6 @@
       <file absfname="/opt/osg-flock/node-check/osgvo-additional-htcondor-config" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
          <untar_options cond_attr="TRUE"/>
       </file>
-      <file absfname="/opt/osg-flock/node-check/cvmfs-check.sh" after_entry="True" after_group="True" const="True" executable="True" period="100" prefix="NOPREFIX" untar="False" wrapper="False">
-         <untar_options cond_attr="TRUE"/>
-      </file>
       <file absfname="/opt/osg-flock/node-check/osgvo-bench" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
          <untar_options cond_attr="TRUE"/>
       </file>
