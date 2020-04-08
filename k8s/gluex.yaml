@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gluex-frontend
+  namespace: osg-frontends
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: gluex-frontend
+  template:
+    metadata:
+      labels:
+        k8s-app: gluex-frontend
+    spec:
+      containers:
+      - env:
+        - name: VO_POOL
+          value: "gremlin.phys.uconn.edu" 
+        name: gluex-frontend
+        image: aaarora/gwms-fe-docker:latest
+        ports:
+        - containerPort: 80 
+        volumeMounts:
+        - mountPath: /var/lib/gwms-frontend/web-area
+          name: web-storage
+        - mountPath: /etc/grid-security/gwms-frontend
+          name: proxycerts-secret
+          readOnly: true
+        - mountPath: /etc/gwms-frontend/proxies.ini
+          subPath: proxies.ini
+          name: proxies-config
+        - mountPath: /etc/gwms-frontend/frontend.xml.k8s
+          subPath: frontend.xml.k8s
+          name: fexml-config
+        resources:
+          limits:
+            cpu: 4
+            memory: 3Gi
+          requests:
+            cpu: 3
+            memory: 1Gi
+      restartPolicy: Always
+      volumes:
+        - name: web-storage
+          persistentVolumeClaim:
+            claimName: gluex-storage
+        - name: proxycerts-secret
+          secret:
+            secretName: gluexproxycerts
+            defaultMode: 0600      #Right File Permissions so can only be read by one node.
+        - name: fexml-config
+          configMap:
+             name: gluex-fexml
+        - name : proxies-config
+          configMap:
+             defaultMode: 420
+             items:
+             - key: proxies.ini
+               path: proxies.ini
+             name: gluex-proxies-config

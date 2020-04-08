@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gluex-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  namespace: osg-frontends
+spec:
+  rules:
+  - host: gluex-frontend.nautilus.optiputer.net
+    http:
+      paths:
+      - backend:
+          serviceName: gluex-service
+          servicePort: 80
