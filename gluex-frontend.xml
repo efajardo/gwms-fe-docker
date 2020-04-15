@@ -35,7 +35,7 @@
          </match_attrs>
          <schedds>
             <schedd DN="/CN=scosg16.jlab.org" fullname="scosg16.jlab.org"/>
-            <schedd DN="/DC=incommon/C=US/ST=Connecticut/L=Storrs/O=University of Connecticut/OU=Academic IT/CN=gluex.phys.uconn.edu" fullname="gluex.phys.uconn.edu"/>
+            <schedd DN="/DC=org/DC=incommon/C=US/ST=Connecticut/L=Storrs/O=University of Connecticut/OU=Academic IT/CN=gluex.phys.uconn.edu" fullname="gluex.phys.uconn.edu"/>
             <schedd DN="/DC=org/DC=incommon/C=US/ST=Connecticut/L=Storrs/O=University of Connecticut/OU=Academic IT/CN=gremlin.phys.uconn.edu" fullname="gremlin.phys.uconn.edu"/>
             <schedd DN="/CN=scigrid1.physics.fsu.edu" fullname="scigrid1.physics.fsu.edu"/>
             <schedd DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-gluex-1.t2.ucsd.edu" fullname="osg-gluex-1.t2.ucsd.edu"/>
