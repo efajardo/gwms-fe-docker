@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jlab-frontend
+  name: igwn-frontend
   namespace: osg-frontends
 spec:
   replicas: 1
   selector:
     matchLabels:
-      k8s-app: jlab-frontend
+      k8s-app: igwn-frontend
   template:
     metadata:
       labels:
-        k8s-app: jlab-frontend
+        k8s-app: igwn-frontend
     spec:
       containers:
       - env:
         - name: VO_POOL
-          value: "osg-jlab-1.t2.ucsd.edu" 
-        name: jlab-frontend
+          value: "osg-ligo-1.t2.ucsd.edu" 
+        name: igwn-frontend
         image: aaarora/gwms-fe-docker:latest
         ports:
         - containerPort: 80 
         volumeMounts:
         - mountPath: /var/lib/gwms-frontend/web-area
-          name: jlab-storage
+          name: web-storage
         - mountPath: /etc/grid-security/gwms-frontend
           name: proxycerts-secret
           readOnly: true
@@ -41,30 +41,34 @@ spec:
           name: proxy-renewal
         resources:
           limits:
-            cpu: 4
-            memory: 3Gi
-          requests:
             cpu: 3
-            memory: 1Gi
+            memory: 10Gi
+          requests:
+            cpu: 2
+            memory: 5Gi
       restartPolicy: Always
       volumes:
-        - name: jlab-storage
+        - name: web-storage
           persistentVolumeClaim:
-            claimName: jlab-storage
+            claimName: igwn-storage
         - name: proxycerts-secret
           secret:
-            secretName: jlabproxycerts
+            secretName: igwnproxycerts
             defaultMode: 0600      #Right File Permissions so can only be read by one node.
-        - name:  vomscerts-secret
-          secret:
-            secretName: jlabvomscerts
-            defaultMode: 0600
-        - name: proxies-config
-          configMap:
-             name: jlab-proxies-config
         - name: fexml-config
           configMap:
-             name: jlab-fexml
+             name: igwn-fexml
+        - name:  vomscerts-secret
+          secret:
+            secretName: osgvomscerts
+            defaultMode: 0600
+        - name : proxies-config
+          configMap:
+             defaultMode: 420
+             items:
+             - key: proxies.ini
+               path: proxies.ini
+             name: igwn-proxies-config
         - name: proxy-renewal
           configMap:
              name: proxy-generator

@@ -88,6 +88,8 @@ class VO(object):
         self.name = vo
         if fqan.startswith('/%s/Role=' % vo):
             pass
+        elif fqan.startswith('/%s/' % vo):
+            pass
         elif fqan.startswith('/Role='):
             fqan = '/%s%s' % (vo, fqan)
         else:
@@ -177,7 +179,7 @@ def voms_proxy_fake(proxy, vo_info):
            '-hostkey', vo_info.key,
            '-uri', vo_info.uri,
            '-fqan', vo_info.fqan,
-           '-path-length', 10,
+           '-path-length', '20',
            '-rfc']
     return _run_command(cmd)
 
