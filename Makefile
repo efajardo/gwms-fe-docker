@@ -1,9 +1,8 @@
 .PHONY: configmap
 
-all:
+all: jlab gluex igwn
 	-kubectl delete configmap proxy-generator -n osg-frontends
 	-kubectl create configmap proxy-generator --from-file=gwms_renew_proxies=gwms_renew_proxies -n osg-frontends
-
 jlab:
 	-kubectl delete secret jlabproxycerts -n osg-frontends
 	-kubectl create secret generic jlabproxycerts --from-file=frontendkey.pem=../jlabcerts/osg-jlab-1.t2.ucsd.edu-key.pem --from-file=frontendcert.pem=../jlabcerts/osg-jlab-1.t2.ucsd.edu.pem -n osg-frontends	
