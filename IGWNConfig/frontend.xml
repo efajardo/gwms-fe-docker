@@ -24,6 +24,7 @@
          </match_attrs>
          <collectors>
             <collector DN="/DC=org/DC=incommon/C=US/ST=WI/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="feligo@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
+           <collector DN="/DC=org/DC=incommon/C=US/ST=Wisconsin/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="feligo@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
          </collectors>
       </factory>
       <job comment="Define job constraint and schedds globally for simplicity" query_expr="(JobUniverse==5)&amp;&amp;(GLIDEIN_Is_Monitor =!= TRUE)&amp;&amp;(JOB_Is_Monitor =!= TRUE)">
@@ -59,7 +60,7 @@
       <attr name="GLIDEIN_CLAIM_WORKLIFE" glidein_publish="False" job_publish="False" parameter="True" type="int" value="10800"/>
       <attr name="GLIDEIN_Expose_Grid_Env" glidein_publish="True" job_publish="True" parameter="False" type="string" value="True"/>
       <attr name="GLIDEIN_Glexec_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="NEVER"/>
-      <attr name="GLIDEIN_Job_Max_Time" glidein_publish="True" job_publish="False" parameter="True" type="int" value="36200"/>
+      <attr name="GLIDEIN_Job_Max_Time" glidein_publish="True" job_publish="False" parameter="True" type="int" value="7200"/>
       <attr name="GLIDEIN_Max_Idle" glidein_publish="True" job_publish="False" parameter="True" type="int" value="2400"/>
       <attr name="LIGO_DATAFIND_SERVER" glidein_publish="True" job_publish="True" parameter="False" type="string" value="datafind.ligo.org:443"/>
       <attr name="OSG_DEFAULT_CVMFS_DATA" glidein_publish="False" job_publish="False" parameter="True" type="string" value="/cvmfs/ligo.osgstorage.org"/>
@@ -411,10 +412,10 @@
       <file absfname="/opt/osg-flock/node-check/osgvo-node-validation" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
          <untar_options cond_attr="TRUE"/>
       </file>
-      <file absfname="/opt/osg-flock/node-check/osgvo-node-advertise" after_entry="True" after_group="False" const="True" executable="True" period="240" prefix="NOPREFIX" untar="False" wrapper="False">
+      <file absfname="/opt/osg-flock/node-check/osgvo-node-advertise" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="NOPREFIX" untar="False" wrapper="False">
          <untar_options cond_attr="TRUE"/>
       </file>
-      <file absfname="/opt/osg-flock/job-wrappers/user-job-wrapper.sh" after_entry="True" after_group="True" const="True" executable="False" period="0" prefix="NOPREFIX" untar="False" wrapper="True">
+      <file absfname="/opt/osg-flock/job-wrappers/user-job-wrapper.sh" after_entry="True" after_group="False" const="True" executable="False" period="0" prefix="NOPREFIX" untar="False" wrapper="True">
          <untar_options cond_attr="TRUE"/>
       </file>
       <file absfname="/opt/osg-flock/node-check/frame_files_small.txt" after_entry="True" after_group="False" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">

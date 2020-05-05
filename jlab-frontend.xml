@@ -25,6 +25,7 @@
          </match_attrs>
          <collectors>
             <collector DN="/DC=org/DC=incommon/C=US/ST=WI/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" comment="Second OSG Factory" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="fejlab@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
+<collector DN="/DC=org/DC=incommon/C=US/ST=Wisconsin/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" comment="Second OSG Factory" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="fejlab@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
          </collectors>
       </factory>
       <job comment="Define job constraint and schedds globally for simplicity" query_expr="(JobUniverse==5)&amp;&amp;(GLIDEIN_Is_Monitor =!= TRUE)&amp;&amp;(JOB_Is_Monitor =!= TRUE)">
