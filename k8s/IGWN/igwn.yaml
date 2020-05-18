@@ -36,9 +36,6 @@ spec:
         - mountPath: /etc/gwms-frontend/frontend.xml.k8s
           subPath: frontend.xml.k8s
           name: fexml-config
-        - mountPath: /usr/libexec/gwms_renew_proxies
-          subPath: gwms_renew_proxies
-          name: proxy-renewal
         resources:
           limits:
             cpu: 3
@@ -69,7 +66,3 @@ spec:
              - key: proxies.ini
                path: proxies.ini
              name: igwn-proxies-config
-        - name: proxy-renewal
-          configMap:
-             name: proxy-generator
-             defaultMode: 0700
