@@ -4,6 +4,7 @@ metadata:
   name: gluex-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: ""
   namespace: osg-frontends
 spec:
   rules:
