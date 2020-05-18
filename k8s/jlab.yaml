@@ -30,15 +30,15 @@ spec:
         - mountPath: /etc/grid-security/voms
           name: vomscerts-secret
           readOnly: true
+        - mountPath: /etc/grid-security/eicvoms
+          name: eicvomscerts-secret
+          readOnly: true
         - mountPath: /etc/gwms-frontend/proxies.ini
           subPath: proxies.ini
           name: proxies-config
         - mountPath: /etc/gwms-frontend/frontend.xml.k8s
           subPath: frontend.xml.k8s
           name: fexml-config
-        - mountPath: /usr/libexec/gwms_renew_proxies
-          subPath: gwms_renew_proxies
-          name: proxy-renewal
         resources:
           limits:
             cpu: 4
@@ -65,7 +65,7 @@ spec:
         - name: fexml-config
           configMap:
              name: jlab-fexml
-        - name: proxy-renewal
-          configMap:
-             name: proxy-generator
-             defaultMode: 0700
+        - name:  eicvomscerts-secret
+          secret:
+            secretName: eicvomscerts
+            defaultMode: 0600

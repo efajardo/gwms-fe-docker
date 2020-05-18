@@ -8,6 +8,8 @@ jlab:
 	-kubectl create secret generic jlabproxycerts --from-file=frontendkey.pem=../jlabcerts/osg-jlab-1.t2.ucsd.edu-key.pem --from-file=frontendcert.pem=../jlabcerts/osg-jlab-1.t2.ucsd.edu.pem -n osg-frontends	
 	-kubectl delete secret jlabvomscerts -n osg-frontends
 	-kubectl create secret generic jlabvomscerts --from-file=../jlabvomscerts/vomscert.pem --from-file=../jlabvomscerts/vomskey.pem -n osg-frontends
+	-kubectl delete secret eicvomscerts -n osg-frontends
+	-kubectl create secret generic eicvomscerts --from-file=../eicvomscerts/vomscert.pem --from-file=../eicvomscerts/vomskey.pem -n osg-frontends
 	-kubectl delete configmap jlab-fexml -n osg-frontends
 	-kubectl create configmap jlab-fexml --from-file=frontend.xml.k8s=jlab-frontend.xml -n osg-frontends
 	-kubectl delete configmap jlab-proxies-config -n osg-frontends
