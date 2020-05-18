@@ -23,7 +23,6 @@
             <match_attr name="GLIDEIN_Site" type="string"/>
          </match_attrs>
          <collectors>
-            <collector DN="/DC=org/DC=incommon/C=US/ST=WI/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="feligo@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
            <collector DN="/DC=org/DC=incommon/C=US/ST=Wisconsin/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-2.opensciencegrid.org" factory_identity="gfactory@gfactory-2.opensciencegrid.org" my_identity="feligo@gfactory-2.opensciencegrid.org" node="gfactory-2.opensciencegrid.org"/>
          </collectors>
       </factory>
@@ -41,6 +40,7 @@
 	    <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=Pasadena/O=California Institute of Technology/OU=Laser Interferometer Gravitational-Wave Observatory/CN=ldas-osg.ligo-wa.caltech.edu" fullname="ldas-osg.ligo-wa.caltech.edu"/>
             <schedd DN="/DC=org/DC=terena/DC=tcs/C=NL/L=Amsterdam/O=Nikhef/CN=stro.nikhef.nl" fullname="stro.nikhef.nl"/>
             <schedd DN="/CN=submit-osg-dev.ligo.uwm.edu" fullname="submit-osg-dev.ligo.uwm.edu"/>
+            <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=Pasadena/O=California Institute of Technology/OU=Laser Interferometer Gravitational-Wave Observatory/CN=ldas-osg.ligo-la.caltech.edu" fullname="ldas-osg.ligo-la.caltech.edu"/>
          </schedds>
       </job>
    </match>
