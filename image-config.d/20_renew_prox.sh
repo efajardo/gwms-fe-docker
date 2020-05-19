@@ -5,8 +5,8 @@
 #
 LOCK=/var/lock/subsys/gwms-renew-proxies
 
-if [ ! -f $lockfile ]; then
-   touch "$LOCK"
+if [ ! -f $LOCK ]; then
+   touch $LOCK
 fi
 
 /usr/libexec/gwms_renew_proxies
