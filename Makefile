@@ -18,9 +18,9 @@ gluex:
 	-kubectl delete secret gluexproxycerts -n osg-frontends
 	-kubectl create secret generic gluexproxycerts --from-file=frontendkey.pem=../gluex-pilot-certs/hostkey.pem  --from-file=frontendcert.pem=../gluex-pilot-certs/hostcert.pem -n osg-frontends
 	-kubectl delete configmap gluex-fexml -n osg-frontends
-	-kubectl create configmap gluex-fexml --from-file=frontend.xml.k8s=gluex-frontend.xml -n osg-frontends
+	-kubectl create configmap gluex-fexml --from-file=frontend.xml.k8s=GluexConfig/gluex-frontend.xml -n osg-frontends
 	-kubectl delete configmap gluex-proxies-config -n osg-frontends
-	-kubectl create configmap gluex-proxies-config --from-file=proxies.ini=gluex-proxies.ini -n osg-frontends
+	-kubectl create configmap gluex-proxies-config --from-file=proxies.ini=GluexConfig/gluex-proxies.ini -n osg-frontends
 
 igwn:
 	-kubectl delete secret igwnproxycerts -n osg-frontends
