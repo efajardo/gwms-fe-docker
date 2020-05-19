@@ -11,9 +11,9 @@ jlab:
 	-kubectl delete secret eicvomscerts -n osg-frontends
 	-kubectl create secret generic eicvomscerts --from-file=../eicvomscerts/vomscert.pem --from-file=../eicvomscerts/vomskey.pem -n osg-frontends
 	-kubectl delete configmap jlab-fexml -n osg-frontends
-	-kubectl create configmap jlab-fexml --from-file=frontend.xml.k8s=jlab-frontend.xml -n osg-frontends
+	-kubectl create configmap jlab-fexml --from-file=frontend.xml.k8s=JLabConfig/jlab-frontend.xml -n osg-frontends
 	-kubectl delete configmap jlab-proxies-config -n osg-frontends
-	-kubectl create configmap jlab-proxies-config --from-file=proxies.ini -n osg-frontends
+	-kubectl create configmap jlab-proxies-config --from-file=proxies.ini=JLabConfig/proxies.ini -n osg-frontends
 gluex:
 	-kubectl delete secret gluexproxycerts -n osg-frontends
 	-kubectl create secret generic gluexproxycerts --from-file=frontendkey.pem=../gluex-pilot-certs/hostkey.pem  --from-file=frontendcert.pem=../gluex-pilot-certs/hostcert.pem -n osg-frontends
