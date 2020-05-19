@@ -35,10 +35,10 @@ spec:
           name: fexml-config
         resources:
           limits:
-            cpu: 4
+            cpu: 2
             memory: 3Gi
           requests:
-            cpu: 3
+            cpu: 2
             memory: 1Gi
       restartPolicy: Always
       volumes:
