@@ -31,3 +31,12 @@ igwn:
 	-kubectl create configmap igwn-fexml --from-file=frontend.xml.k8s=IGWNConfig/frontend.xml -n osg-frontends
 	-kubectl delete configmap igwn-proxies-config -n osg-frontends
 	-kubectl create configmap igwn-proxies-config --from-file=proxies.ini=IGWNConfig/proxies.ini -n osg-frontends
+uclhc:
+	-kubectl delete secret uclhcproxycerts -n osg-frontends
+	-kubectl create secret generic uclhcproxycerts --from-file=frontendkey.pem=../uclhccerts/hostkey.pem --from-file=frontendcert.pem=../uclhccerts/hostcert.pem -n osg-frontends
+	-kubectl delete secret ucibosco -n osg-frontends
+	-kubectl create secret generic ucibosco --from-file=../uciBosco/bosco_key.rsa.pub --from-file=../uciBosco/bosco_key.rsa -n osg-frontends
+	-kubectl delete configmap uclhc-fexml -n osg-frontends
+	-kubectl create configmap uclhc-fexml --from-file=frontend.xml.k8s=UCLHCConfig/frontend.xml -n osg-frontends
+	-kubectl delete configmap uclhc-proxies-config -n osg-frontends
+	-kubectl create configmap uclhc-proxies-config --from-file=proxies.ini=UCLHCConfig/proxies.ini -n osg-frontends
