@@ -1,30 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jlab-frontend
+  name: gluex-frontend
   namespace: osg-frontends
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      k8s-app: jlab-frontend
+      k8s-app: gluex-frontend
   template:
     metadata:
       labels:
-        k8s-app: jlab-frontend
+        k8s-app: gluex-frontend
     spec:
       containers:
-      - name: jlab-frontend
+      - env:
+        - name: VO_POOL
+          value: "gremlin.phys.uconn.edu" 
+        name: gluex-frontend
         image: aaarora/gwms-fe-docker:latest
         ports:
         - containerPort: 80 
         volumeMounts:
         - mountPath: /var/lib/gwms-frontend/web-area
-          name: jlab-storage
+          name: web-storage
         - mountPath: /etc/grid-security/gwms-frontend
           name: proxycerts-secret
-          readOnly: true
-        - mountPath: /etc/grid-security/voms
-          name: vomscerts-secret
           readOnly: true
         - mountPath: /etc/gwms-frontend/proxies.ini
           subPath: proxies.ini
@@ -34,27 +35,27 @@ spec:
           name: fexml-config
         resources:
           limits:
-            cpu: 4
+            cpu: 2
             memory: 3Gi
           requests:
-            cpu: 3
+            cpu: 2
             memory: 1Gi
       restartPolicy: Always
       volumes:
-        - name: jlab-storage
+        - name: web-storage
           persistentVolumeClaim:
-            claimName: jlab-storage
+            claimName: gluex-storage
         - name: proxycerts-secret
           secret:
-            secretName: proxycerts
+            secretName: gluexproxycerts
             defaultMode: 0600      #Right File Permissions so can only be read by one node.
-        - name:  vomscerts-secret
-          secret:
-            secretName: vomscerts
-            defaultMode: 0600
-        - name: proxies-config
-          configMap:
-             name: proxies
         - name: fexml-config
           configMap:
-             name: fexml
+             name: gluex-fexml
+        - name : proxies-config
+          configMap:
+             defaultMode: 420
+             items:
+             - key: proxies.ini
+               path: proxies.ini
+             name: gluex-proxies-config

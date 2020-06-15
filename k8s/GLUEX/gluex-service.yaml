@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gluex-service
+  namespace: osg-frontends
+spec:
+  selector:
+    k8s-app: gluex-frontend
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 80
+    targetPort: 80
+    protocol: TCP

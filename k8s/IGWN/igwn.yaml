@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: igwn-frontend
+  namespace: osg-frontends
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: igwn-frontend
+  template:
+    metadata:
+      labels:
+        k8s-app: igwn-frontend
+    spec:
+      containers:
+      - env:
+        - name: VO_POOL
+          value: "osg-ligo-1.t2.ucsd.edu, condor-osg.ligo.caltech.edu" 
+        name: igwn-frontend
+        image: aaarora/gwms-fe-docker:latest
+        ports:
+        - containerPort: 80 
+        volumeMounts:
+        - mountPath: /var/lib/gwms-frontend/web-area
+          name: web-storage
+        - mountPath: /etc/grid-security/gwms-frontend
+          name: proxycerts-secret
+          readOnly: true
+        - mountPath: /etc/grid-security/voms
+          name: vomscerts-secret
+          readOnly: true
+        - mountPath: /etc/gwms-frontend/proxies.ini
+          subPath: proxies.ini
+          name: proxies-config
+        - mountPath: /etc/gwms-frontend/frontend.xml.k8s
+          subPath: frontend.xml.k8s
+          name: fexml-config
+        resources:
+          limits:
+            cpu: 3
+            memory: 10Gi
+          requests:
+            cpu: 2
+            memory: 5Gi
+      restartPolicy: Always
+      volumes:
+        - name: web-storage
+          persistentVolumeClaim:
+            claimName: igwn-storage
+        - name: proxycerts-secret
+          secret:
+            secretName: igwnproxycerts
+            defaultMode: 0600      #Right File Permissions so can only be read by one node.
+        - name: fexml-config
+          configMap:
+             name: igwn-fexml
+        - name:  vomscerts-secret
+          secret:
+            secretName: osgvomscerts
+            defaultMode: 0600
+        - name : proxies-config
+          configMap:
+             defaultMode: 420
+             items:
+             - key: proxies.ini
+               path: proxies.ini
+             name: igwn-proxies-config

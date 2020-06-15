@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uclhc-frontend
+  namespace: osg-frontends
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: uclhc-frontend
+  template:
+    metadata:
+      labels:
+        k8s-app: uclhc-frontend
+    spec:
+      containers:
+      - env:
+        - name: VO_POOL
+          value: "uclhc-fe-1.t2.ucsd.edu" 
+        name: uclhc-frontend
+        image: aaarora/gwms-fe-docker:latest
+        ports:
+        - containerPort: 80 
+        volumeMounts:
+        - mountPath: /var/lib/gwms-frontend/web-area
+          name: web-storage
+        - mountPath: /etc/grid-security/gwms-frontend
+          name: proxycerts-secret
+          readOnly: true
+        - mountPath: /etc/grid-security/bosco/bosco_key.rsa.pub
+          name: bosco-secret-public
+          subPath: bosco_key.rsa.pub
+        - mountPath: /etc/grid-security/bosco/bosco_key.rsa
+          name: bosco-secret-private
+          subPath: bosco_key.rsa
+        - mountPath: /etc/gwms-frontend/proxies.ini
+          subPath: proxies.ini
+          name: proxies-config
+        - mountPath: /etc/gwms-frontend/frontend.xml.k8s
+          subPath: frontend.xml.k8s
+          name: fexml-config
+        resources:
+          limits:
+            cpu: 2
+            memory: 8Gi
+          requests:
+            cpu: 1
+            memory: 6Gi
+      restartPolicy: Always
+      volumes:
+        - name: web-storage
+          persistentVolumeClaim:
+            claimName: uclhc-storage
+        - name: proxycerts-secret
+          secret:
+            secretName: uclhcproxycerts
+            defaultMode: 0600
+        - name: bosco-secret-public
+          secret:
+            secretName: ucibosco
+            items:
+            - key: bosco_key.rsa.pub
+              path: bosco_key.rsa.pub
+            defaultMode: 0744
+        - name: bosco-secret-private
+          secret:
+            secretName: ucibosco
+            items:
+            - key: bosco_key.rsa
+              path: bosco_key.rsa
+            defaultMode: 0744
+        - name: fexml-config
+          configMap:
+             name: uclhc-fexml
+        - name : proxies-config
+          configMap:
+             defaultMode: 420
+             items:
+             - key: proxies.ini
+               path: proxies.ini
+             name: uclhc-proxies-config
