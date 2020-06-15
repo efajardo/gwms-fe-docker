@@ -1,8 +1,8 @@
 .PHONY: configmap
 
 all: jlab gluex igwn
-	-kubectl delete configmap proxy-generator -n osg-frontends
-	-kubectl create configmap proxy-generator --from-file=gwms_renew_proxies=gwms_renew_proxies -n osg-frontends
+#	-kubectl delete configmap proxy-generator -n osg-frontends
+#	-kubectl create configmap proxy-generator --from-file=gwms_renew_proxies=gwms_renew_proxies -n osg-frontends
 jlab:
 	-kubectl delete secret jlabproxycerts -n osg-frontends
 	-kubectl create secret generic jlabproxycerts --from-file=frontendkey.pem=../jlabcerts/osg-jlab-1.t2.ucsd.edu-key.pem --from-file=frontendcert.pem=../jlabcerts/osg-jlab-1.t2.ucsd.edu.pem -n osg-frontends	
@@ -35,7 +35,7 @@ uclhc:
 	-kubectl delete secret uclhcproxycerts -n osg-frontends
 	-kubectl create secret generic uclhcproxycerts --from-file=frontendkey.pem=../uclhccerts/hostkey.pem --from-file=frontendcert.pem=../uclhccerts/hostcert.pem -n osg-frontends
 	-kubectl delete secret ucibosco -n osg-frontends
-	-kubectl create secret generic ucibosco --from-file=../uciBosco/bosco_key.rsa.pub --from-file=../uciBosco/bosco_key.rsa -n osg-frontends
+	-kubectl create secret generic ucibosco --from-file=bosco_key.rsa.pub=../uciBosco/bosco_key.rsa.pub --from-file=bosco_key.rsa=../uciBosco/bosco_key.rsa -n osg-frontends
 	-kubectl delete configmap uclhc-fexml -n osg-frontends
 	-kubectl create configmap uclhc-fexml --from-file=frontend.xml.k8s=UCLHCConfig/frontend.xml -n osg-frontends
 	-kubectl delete configmap uclhc-proxies-config -n osg-frontends

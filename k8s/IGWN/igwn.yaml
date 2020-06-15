@@ -16,7 +16,7 @@ spec:
       containers:
       - env:
         - name: VO_POOL
-          value: "osg-ligo-1.t2.ucsd.edu" 
+          value: "osg-ligo-1.t2.ucsd.edu, condor-osg.ligo.caltech.edu" 
         name: igwn-frontend
         image: aaarora/gwms-fe-docker:latest
         ports:

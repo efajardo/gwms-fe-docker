@@ -44,7 +44,7 @@
    </match>
    <monitor base_dir="/var/lib/gwms-frontend/web-area/monitor" flot_dir="/usr/share/javascriptrrd/flot" javascriptRRD_dir="/usr/share/javascriptrrd/js" jquery_dir="/usr/share/javascriptrrd/flot"/>
    <monitor_footer display_txt="" href_link=""/>
-   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-gluex-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="GluexVO" sym_key="aes_256_cbc">
+   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-gluex-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="GluexVO" sym_key="aes_256_cbc">
       <credentials>
       </credentials>
    </security>

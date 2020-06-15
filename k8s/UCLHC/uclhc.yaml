@@ -27,9 +27,12 @@ spec:
         - mountPath: /etc/grid-security/gwms-frontend
           name: proxycerts-secret
           readOnly: true
-        - mountPath: /etc/grid-security/bosco
-          name: bosco-secret
-          readOnly: true
+        - mountPath: /etc/grid-security/bosco/bosco_key.rsa.pub
+          name: bosco-secret-public
+          subPath: bosco_key.rsa.pub
+        - mountPath: /etc/grid-security/bosco/bosco_key.rsa
+          name: bosco-secret-private
+          subPath: bosco_key.rsa
         - mountPath: /etc/gwms-frontend/proxies.ini
           subPath: proxies.ini
           name: proxies-config
@@ -52,10 +55,20 @@ spec:
           secret:
             secretName: uclhcproxycerts
             defaultMode: 0600
-        - name: bosco-secret
+        - name: bosco-secret-public
           secret:
             secretName: ucibosco
-            defaultMode: 0600
+            items:
+            - key: bosco_key.rsa.pub
+              path: bosco_key.rsa.pub
+            defaultMode: 0744
+        - name: bosco-secret-private
+          secret:
+            secretName: ucibosco
+            items:
+            - key: bosco_key.rsa
+              path: bosco_key.rsa
+            defaultMode: 0744
         - name: fexml-config
           configMap:
              name: uclhc-fexml
