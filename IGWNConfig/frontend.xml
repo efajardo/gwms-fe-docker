@@ -46,7 +46,7 @@
    </match>
    <monitor base_dir="/var/lib/gwms-frontend/web-area/monitor" flot_dir="/usr/share/javascriptrrd/flot" javascriptRRD_dir="/usr/share/javascriptrrd/js" jquery_dir="/usr/share/javascriptrrd/flot"/>
    <monitor_footer display_txt="" href_link=""/>
-   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-ligo-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="LIGO" sym_key="aes_256_cbc">
+   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-ligo-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="LIGO" sym_key="aes_256_cbc">
       <credentials>
       </credentials>
    </security>
@@ -405,8 +405,10 @@
    <ccbs>
    </ccbs>
    <collectors>
-      <collector DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-ligo-1.t2.ucsd.edu" group="default" node="osg-ligo-1.t2.ucsd.edu:9618" secondary="False"/>
-      <collector DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-ligo-1.t2.ucsd.edu" group="default" node="osg-ligo-1.t2.ucsd.edu:9620-9630" secondary="True"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-ligo-1.t2.ucsd.edu" group="default" node="osg-ligo-1.t2.ucsd.edu:9618" secondary="False"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-ligo-1.t2.ucsd.edu" group="default" node="osg-ligo-1.t2.ucsd.edu:9620-9630" secondary="True"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=Pasadena/O=California Institute of Technology/OU=Laser Interferometer Gravitational-Wave Observatory/CN=condor-osg.ligo.caltech.edu" node="condor-osg.ligo.caltech.edu" secondary="False" group="1"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=Pasadena/O=California Institute of Technology/OU=Laser Interferometer Gravitational-Wave Observatory/CN=condor-osg.ligo.caltech.edu" node="condor-osg.ligo.caltech.edu:9620-9630" secondary="True" group="1"/>
    </collectors>
    <files>
       <file absfname="/opt/osg-flock/node-check/osgvo-node-validation" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
