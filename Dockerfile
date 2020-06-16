@@ -7,6 +7,7 @@ RUN yum -y install glideinwms-vofrontend-standalone --enablerepo=osg-upcoming &&
     yum -y install git
 
 ADD gwms_renew_proxies /usr/libexec/gwms_renew_proxies
+ADD cvWParamDict.py /usr/lib/python2.7/site-packages/glideinwms/creation/lib/cvWParamDict.py
 ADD renew_proxies /etc/cron.d/renew_proxies
 ADD 10-gwms-fe.conf /etc/supervisord.d/
 ADD image-config.d/* /etc/osg/image-config.d/
