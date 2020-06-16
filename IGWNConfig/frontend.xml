@@ -164,7 +164,7 @@
             </file>
          </files>
       </group>
-      <group name="itb-virgo" enabled="True">
+      <group name="itb-virgo" enabled="False">
          <config ignore_down_entries="">
             <glideins_removal margin="0" requests_tracking="False" type="NO" wait="0"/>
             <idle_glideins_lifetime max="0"/>
@@ -211,7 +211,7 @@
             </file>
          </files>
       </group>
-      <group name="itb-virgo-gpu" enabled="True">
+      <group name="itb-virgo-gpu" enabled="False">
          <config ignore_down_entries="">
             <glideins_removal margin="0" requests_tracking="False" type="NO" wait="0"/>
             <idle_glideins_lifetime max="0"/>
@@ -330,7 +330,7 @@
          <files>
          </files>
       </group>
-      <group name="virgo" enabled="True">
+      <group name="virgo" enabled="False">
          <config ignore_down_entries="">
             <glideins_removal margin="0" requests_tracking="False" type="NO" wait="0"/>
             <idle_glideins_lifetime max="0"/>
@@ -365,7 +365,7 @@
          <files>
          </files>
       </group>
-      <group name="virgo-gpu" enabled="True">
+      <group name="virgo-gpu" enabled="False">
          <config ignore_down_entries="">
             <glideins_removal margin="0" requests_tracking="False" type="NO" wait="0"/>
             <idle_glideins_lifetime max="0"/>
