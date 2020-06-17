@@ -93,7 +93,7 @@
                <match_attrs>
                </match_attrs>
                <schedds>
-                  <schedd DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=cabinet-10-10-4.t2.ucsd.edu" fullname="cabinet-10-10-4.t2.ucsd.edu"/>
+                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=cabinet-10-10-4.t2.ucsd.edu" fullname="cabinet-10-10-4.t2.ucsd.edu"/>
                </schedds>
             </job>
          </match>
@@ -187,7 +187,7 @@
                <match_attrs>
                </match_attrs>
                <schedds>
-                  <schedd DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=cabinet-10-10-4.t2.ucsd.edu" fullname="cabinet-10-10-4.t2.ucsd.edu"/>
+                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=cabinet-10-10-4.t2.ucsd.edu" fullname="cabinet-10-10-4.t2.ucsd.edu"/>
                </schedds>
             </job>
          </match>
