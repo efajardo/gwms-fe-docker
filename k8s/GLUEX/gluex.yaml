@@ -17,8 +17,10 @@ spec:
       - env:
         - name: VO_POOL
           value: "gremlin.phys.uconn.edu" 
+        - name:  _CONDOR_TOOL_TIMEOUT_MULTIPLIER
+          value: "100"
         name: gluex-frontend
-        image: aaarora/gwms-fe-docker:latest
+        image: efajardo/gwms-fe-docker:upcoming
         ports:
         - containerPort: 80 
         volumeMounts:
