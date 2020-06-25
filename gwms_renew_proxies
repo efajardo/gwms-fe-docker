@@ -146,7 +146,6 @@ def voms_proxy_init(proxy, voms_attr=None):
     """
     cmd = ['voms-proxy-init',
            '-debug',
-           '-old',
            '-cert', proxy.cert,
            '-key', proxy.key,
            '-out', proxy.tmp_output_fd.name,
