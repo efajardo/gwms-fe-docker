@@ -17,8 +17,10 @@ spec:
       - env:
         - name: VO_POOL
           value: "osg-jlab-1.t2.ucsd.edu" 
+        - name:  _CONDOR_TOOL_TIMEOUT_MULTIPLIER
+          value: "100"
         name: jlab-frontend
-        image: efajardo/gwms-fe-docker:upcoming
+        image: efajardo/gwms-fe-docker:latest
         ports:
         - containerPort: 80 
         volumeMounts:
