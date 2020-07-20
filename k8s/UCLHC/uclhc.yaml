@@ -18,7 +18,8 @@ spec:
         - name: VO_POOL
           value: "uclhc-fe-1.t2.ucsd.edu" 
         name: uclhc-frontend
-        image: aaarora/gwms-fe-docker:latest
+        #image: aaarora/gwms-fe-docker:latest
+        image: efajardo/gwms-fe-docker:upcoming
         ports:
         - containerPort: 80 
         volumeMounts:

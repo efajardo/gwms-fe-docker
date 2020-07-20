@@ -20,7 +20,7 @@ spec:
         - name:  _CONDOR_TOOL_TIMEOUT_MULTIPLIER
           value: "100"
         name: jlab-frontend
-        image: efajardo/gwms-fe-docker:latest
+        image: efajardo/gwms-fe-docker:upcoming
         ports:
         - containerPort: 80 
         volumeMounts:

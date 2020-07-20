@@ -39,7 +39,7 @@
    </match>
    <monitor base_dir="/var/lib/gwms-frontend/web-area/monitor" flot_dir="/usr/share/javascriptrrd/flot" javascriptRRD_dir="/usr/share/javascriptrrd/js" jquery_dir="/usr/share/jasvascriptrrd/flot"/>
    <monitor_footer display_txt="" href_link=""/>
-   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=uclhc-fe-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="UCLHC" sym_key="aes_256_cbc">
+   <security classad_proxy="/etc/grid-security/frontend.proxy" proxy_DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=uclhc-fe-1.t2.ucsd.edu" proxy_selection_plugin="ProxyAll" security_name="UCLHC" sym_key="aes_256_cbc">
       <credentials>
       </credentials>
    </security>
@@ -97,8 +97,8 @@
    <ccbs>
    </ccbs>
    <collectors>
-      <collector DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=uclhc-fe-1.t2.ucsd.edu" group="default" node="uclhc-fe-1.t2.ucsd.edu:9618" secondary="False"/>
-      <collector DN="/DC=org/DC=incommon/C=US/ST=CA/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=uclhc-fe-1.t2.ucsd.edu" group="default" node="uclhc-fe-1.t2.ucsd.edu:9620-9625" secondary="True"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=uclhc-fe-1.t2.ucsd.edu" group="default" node="uclhc-fe-1.t2.ucsd.edu:9618" secondary="False"/>
+      <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=uclhc-fe-1.t2.ucsd.edu" group="default" node="uclhc-fe-1.t2.ucsd.edu:9620-9625" secondary="True"/>
    </collectors>
    <files>
       <file absfname="/opt/osg-flock/node-check/osgvo-node-advertise" after_entry="True" after_group="False" const="True" executable="True" period="240" prefix="NOPREFIX" untar="False" wrapper="False">
