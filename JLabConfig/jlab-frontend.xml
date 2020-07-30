@@ -138,6 +138,8 @@
    <collectors>
       <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-jlab-1.t2.ucsd.edu" group="default" node="osg-jlab-1.t2.ucsd.edu:9618" secondary="False"/>
       <collector DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=osg-jlab-1.t2.ucsd.edu" group="default" node="osg-jlab-1.t2.ucsd.edu:9620-9629" secondary="True"/>
+       <collector DN="/CN=/CN=scicollector.jlab.org" group="1" node="scicollector.jlab.org" secondary="False"/>
+       <collector DN="/CN=/CN=scicollector.jlab.org" group="1" node="scicollector.jlab.org:9620-9629" secondary="True"/>
    </collectors>
    <files>
       <file absfname="/opt/osg-flock/node-check/osgvo-node-validation" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
