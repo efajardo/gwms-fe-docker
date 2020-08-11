@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <frontend advertise_delay="5" advertise_with_multiple="True" advertise_with_tcp="True" downtimes_file="frontenddowntime" frontend_monitor_index_page="False" frontend_name="IGWN-OSG-GWMSFrontend" frontend_versioning="False" group_parallel_workers="2" loop_delay="60" restart_attempts="3" restart_interval="1800">
    <config ignore_down_entries="False">
       <idle_vms_total curb="3000" max="4000"/>
@@ -53,6 +54,7 @@
    <stage base_dir="/var/lib/gwms-frontend/web-area/stage" use_symlink="True" web_base_url="http://igwn-frontend.nautilus.optiputer.net/vofrontend/stage"/>
    <work base_dir="/var/lib/gwms-frontend/vofrontend" base_log_dir="/var/log/gwms-frontend"/>
    <attrs>
+      <attr name="FE_CONFIG_VERSION" glidein_publish="True" job_publish="False" parameter="False" type="string" value="18"/>
       <attr name="CONDOR_OS" glidein_publish="False" job_publish="False" parameter="True" type="string" value="auto"/>
       <attr name="CONDOR_VERSION" glidein_publish="False" job_publish="False" parameter="True" type="string" value="8.9.x"/>
       <attr name="GLIDECLIENT_OSG_VO" glidein_publish="True" job_publish="True" parameter="False" type="string" value="IGWN"/>
@@ -68,6 +70,10 @@
       <attr name="SLOTS_LAYOUT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="partitionable"/>
       <attr name="STARTD_JOB_ATTRS" glidein_publish="True" job_publish="False" parameter="True" type="string" value="x509userproxysubject,x509UserProxyFQAN,x509UserProxyVOName,x509UserProxyEmail,x509UserProxyExpiration,ProjectName,LigoSearchTag,LigoSearchUser,RequestMemory"/>
       <attr name="USE_MATCH_AUTH" glidein_publish="False" job_publish="False" parameter="True" type="string" value="True"/>
+      <attr name="GLIDEIN_SINGULARITY_BINDPATH" glidein_publish="True" job_publish="True" parameter="False" type="string" value="/ceph"/>
+      <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
+      <attr name="SINGULARITY_IMAGES_DICT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="default:/cvmfs/singularity.opensciencegrid.rrg/opensciencegrid/osgvo:el6,rhel7:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el7"/>
+      <attr name="GLIDEIN_CONTAINER_ENV" glidein_publish="True" job_publish="True" parameter="False" type="string" value="gwmsset"/>
    </attrs>
    <groups>
       <group name="itb-ligo" enabled="True">
@@ -105,15 +111,12 @@
          <attrs>
             <attr name="GLIDEIN_DEBUG_OPTIONS" glidein_publish="True" job_publish="True" parameter="False" type="string" value="userjob"/>
             <attr name="GLIDEIN_DEBUG_OUTPUT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="true"/>
-            <attr name="GLIDEIN_SINGULARITY_BINDPATH" glidein_publish="True" job_publish="True" parameter="False" type="string" value="/ceph"/>
-            <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
-            <attr name="SINGULARITY_IMAGES_DICT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="default:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6,rhel7:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el7"/>
          </attrs>
          <files>
             <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
                <untar_options cond_attr="TRUE"/>
             </file>
-            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+	    <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
                <untar_options cond_attr="TRUE"/>
             </file>
          </files>
@@ -150,10 +153,7 @@
             </credentials>
          </security>
          <attrs>
-            <attr name="GLIDEIN_SINGULARITY_BINDPATH" glidein_publish="True" job_publish="True" parameter="False" type="string" value="/ceph"/>
-            <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
             <attr name="RANK" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="1+RequestGPUs"/>
-            <attr name="SINGULARITY_IMAGES_DICT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="default:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7-cuda10:latest,rhel6:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el6-cuda10:latest"/>
          </attrs>
          <files>
             <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
@@ -199,17 +199,20 @@
          <attrs>
             <attr name="GLIDEIN_DEBUG_OPTIONS" glidein_publish="True" job_publish="True" parameter="False" type="string" value="userjob"/>
             <attr name="GLIDEIN_DEBUG_OUTPUT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="true"/>
-            <attr name="GLIDEIN_SINGULARITY_BINDPATH" glidein_publish="True" job_publish="True" parameter="False" type="string" value="/ceph"/>
-            <attr name="SINGULARITY_IMAGES_DICT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="default:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6,rhel7:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el7"/>
+            <attr name="SINGULARITY_JOB" glidein_publish="True" job_publish="True" parameter="True" type="expr" value="$(HAS_SINGULARITY)"/>
+            <attr name="SINGULARITY_IS_SETUID" glidein_publish="True" job_publish="True" parameter="True" type="expr" value='($(GWMS_SINGULARITY_MODE)=?="privileged") ? true: false'/>
+            <attr name="SINGULARITY_IMAGE_EXPR" glidein_publish="True" job_publish="True" parameter="True" type="expr" value="(isUndefined(TARGET.SingularityImage)) ? $(OSG_SINGULARITY_IMAGE_DEFAULT) : TARGET.SingularityImage" />
+            <attr name="SINGULARITY_BIND_EXPR" glidein_publish="True" job_publish="True" parameter="True" type="expr" value="$(GLIDEIN_SINGULARITY_BINDPATH)"/>
          </attrs>
          <files>
             <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
                <untar_options cond_attr="TRUE"/>
             </file>
-            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+            <file absfname="/opt/osg-flock/node-check/advertise-singularity-vars" after_entry="True" const="True" executable="True" period="0" wrapper="False"/>
+            <file absfname="/opt/osg-flock/job-wrappers/simple-job-wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN+PS_" untar="False" wrapper="True">
                <untar_options cond_attr="TRUE"/>
             </file>
-         </files>
+	   </files>
       </group>
       <group name="itb-virgo-gpu" enabled="True">
          <config ignore_down_entries="">
@@ -243,9 +246,6 @@
             </credentials>
          </security>
          <attrs>
-            <attr name="GLIDEIN_SINGULARITY_BINDPATH" glidein_publish="True" job_publish="True" parameter="False" type="string" value="/ceph"/>
-            <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
-            <attr name="SINGULARITY_IMAGES_DICT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="default:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el6,rhel7:/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo:el7"/>
          </attrs>
          <files>
             <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
@@ -290,6 +290,12 @@
          <attrs>
          </attrs>
          <files>
+	    <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+               <untar_options cond_attr="TRUE"/>
+	    </file>
+            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+               <untar_options cond_attr="TRUE"/>
+            </file>
          </files>
       </group>
       <group name="main-gpu" enabled="True">
@@ -328,6 +334,12 @@
             <attr name="RANK" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="1+RequestGPUs"/>
          </attrs>
          <files>
+	    <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+               <untar_options cond_attr="TRUE"/>
+            </file>
+            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+               <untar_options cond_attr="TRUE"/>
+            </file>
          </files>
       </group>
       <group name="virgo" enabled="True">
@@ -363,6 +375,12 @@
          <attrs>
          </attrs>
          <files>
+            <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
+               <untar_options cond_attr="TRUE"/>
+            </file>
+            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+               <untar_options cond_attr="TRUE"/>
+            </file>
          </files>
       </group>
       <group name="virgo-gpu" enabled="True">
@@ -399,6 +417,12 @@
             <attr name="RANK" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="1+RequestGPUs"/>
          </attrs>
          <files>
+            <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" untar="False" wrapper="False">
+               <untar_options cond_attr="TRUE"/>
+            </file>
+            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" untar="False" wrapper="True">
+               <untar_options cond_attr="TRUE"/>
+            </file>
          </files>
       </group>
    </groups>
@@ -417,9 +441,9 @@
       <file absfname="/opt/osg-flock/node-check/osgvo-node-advertise" after_entry="True" after_group="False" const="True" executable="True" period="0" prefix="NOPREFIX" untar="False" wrapper="False">
          <untar_options cond_attr="TRUE"/>
       </file>
-      <file absfname="/opt/osg-flock/job-wrappers/user-job-wrapper.sh" after_entry="True" after_group="False" const="True" executable="False" period="0" prefix="NOPREFIX" untar="False" wrapper="True">
+      <!--<file absfname="/opt/osg-flock/job-wrappers/user-job-wrapper.sh" after_entry="True" after_group="False" const="True" executable="False" period="0" prefix="NOPREFIX" untar="False" wrapper="True">
          <untar_options cond_attr="TRUE"/>
-      </file>
+      </file>-->
       <file absfname="/opt/osg-flock/node-check/frame_files_small.txt" after_entry="True" after_group="False" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
          <untar_options cond_attr="TRUE"/>
       </file>
