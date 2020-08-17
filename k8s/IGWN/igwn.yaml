@@ -13,12 +13,22 @@ spec:
       labels:
         k8s-app: igwn-frontend
     spec:
+      affinity:
+        nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+           - matchExpressions:
+             - key: nautilus.io/region
+               operator: In
+               values:
+               - ucsd
       containers:
       - env:
         - name: VO_POOL
           value: "osg-ligo-1.t2.ucsd.edu, condor-osg.ligo.caltech.edu" 
         name: igwn-frontend
-        image: efajardo/gwms-fe-docker:upcoming
+        #image: efajardo/gwms-fe-docker:upcoming
+        image: efajardo/gwms-fe-docker:latest
         ports:
         - containerPort: 80 
         volumeMounts:
