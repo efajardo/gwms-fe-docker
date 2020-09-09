@@ -13,10 +13,19 @@ spec:
       labels:
         k8s-app: jlab-frontend
     spec:
+      affinity:
+        nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+           - matchExpressions:
+             - key: nautilus.io/region
+               operator: In
+               values:
+               - ucsd
       containers:
       - env:
         - name: VO_POOL
-          value: "osg-jlab-1.t2.ucsd.edu" 
+          value: "osg-jlab-1.t2.ucsd.edu, scicollector.jlab.org" 
         - name:  _CONDOR_TOOL_TIMEOUT_MULTIPLIER
           value: "100"
         name: jlab-frontend
