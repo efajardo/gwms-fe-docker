@@ -3,7 +3,7 @@ LABEL maintainer OSG Software <help@opensciencegrid.org>
 
 RUN yum -y install glideinwms-vofrontend-standalone --enablerepo=osg-upcoming-testing && \
     yum -y install vim emacs && \
-    yum -y update vo-client --enablerepo=osg-testing &&\
+    yum -y update vo-client --enablerepo=osg-development &&\
     yum -y install git
 
 ADD gwms_renew_proxies /usr/libexec/gwms_renew_proxies
