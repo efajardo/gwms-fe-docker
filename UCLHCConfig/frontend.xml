@@ -77,7 +77,7 @@
                <match_attrs>
                </match_attrs>
                <schedds>
-                  <schedd DN="/DC=org/DC=incommon/C=US/ST=CA/L=Irvine/O=University of California/OU=School of Physical Sciences/CN=uclhc-1.ps.uci.edu" fullname="uclhc-1.ps.uci.edu"/>
+                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=Irvine/O=University of California, Irvine/OU=School of Physical Sciences/CN=uclhc-1.ps.uci.edu" fullname="uclhc-1.ps.uci.edu"/>
 		  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=Irvine/O=University of California, Irvine/OU=School of Physical Sciences/CN=uclhc-2.ps.uci.edu" fullname="uclhc-2.ps.uci.edu"/>
                </schedds>
             </job>
