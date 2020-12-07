@@ -89,7 +89,7 @@
             <running_glideins_total curb="90000" max="100000"/>
          </config>
          <match match_expr="True" start_expr="(is_itb)">
-            <factory query_expr='stringListMember("LIGO",GLIDEIN_Supported_VOs) &amp;&amp; FactoryType == "OSG-ITB"'>
+            <factory query_expr='stringListMember("LIGO",GLIDEIN_Supported_VOs) &amp;&amp; FactoryType == "OSG-ITB" &amp;&amp; (GLIDEIN_SITE=!="SuperMIC" &amp;&amp; GLIDEIN_SITE=!="Omaha")'>
                <match_attrs>
                </match_attrs>
                <collectors>
@@ -100,7 +100,7 @@
                <match_attrs>
                </match_attrs>
                <schedds>
-                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=cabinet-10-10-4.t2.ucsd.edu" fullname="cabinet-10-10-4.t2.ucsd.edu"/>
+                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/CN=test-002.t2.ucsd.edu" fullname="test-002.t2.ucsd.edu"/>
                </schedds>
             </job>
          </match>
@@ -142,7 +142,7 @@
             <running_glideins_total curb="90000" max="100000"/>
          </config>
          <match match_expr="True" start_expr="(is_itb)&amp;&amp;(MY.CUDADriverVersion=!=undefined || TARGET.RequestGPUS=?=undefined)">
-            <factory query_expr='stringListMember("LIGOGPU", GLIDEIN_Supported_VOs)&amp;&amp;GLIDEIN_Site=!="Stampede" &amp;&amp;GLIDEIN_Site=!="Comet" &amp;&amp; FactoryType == "OSG-ITB"'>
+            <factory query_expr='stringListMember("LIGOGPU", GLIDEIN_Supported_VOs) &amp;&amp; FactoryType == "OSG-ITB" &amp;&amp; (GLIDEIN_SITE=!="QB2" &amp;&amp; GLIDEIN_SITE=!="Omaha")'>'>
                <match_attrs>
                </match_attrs>
                <collectors>
@@ -162,15 +162,23 @@
             </credentials>
          </security>
          <attrs>
-             <attr name="CONDOR_VERSION" glidein_publish="False" job_publish="False" parameter="True" type="string" value="8.9.9"/>
+            <attr name="CONDOR_VERSION" glidein_publish="False" job_publish="False" parameter="True" type="string" value="8.9.9"/>
+            <attr name="GLIDEIN_DEBUG_OPTIONS" glidein_publish="True" job_publish="True" parameter="False" type="string" value="userjob"/>
+            <attr name="GLIDEIN_DEBUG_OUTPUT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="true"/>
              <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
+            <attr name="SINGULARITY_JOB" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="$(HAS_SINGULARITY)"/>
+            <attr name="SINGULARITY_IS_SETUID" glidein_publish="True" job_publish="False" parameter="True" type="expr" value='($(GWMS_SINGULARITY_MODE)=?="privileged") ? true: false'/>
+            <attr name="SINGULARITY_IMAGE_EXPR" glidein_publish="True" job_publish="False" parameter="True" type="expr" value='!isUndefined(TARGET.SingularityImage) ? TARGET.SingularityImage : "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest"'/>
+            <attr name="SINGULARITY_BIND_EXPR" glidein_publish="True" job_publish="False" parameter="True" type="string" value="/cvmfs,/hadoop,/ceph,/hdfs"/>
+             <attr name="SINGULARITY_IGNORE_MISSING_BIND_TARGET" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="$(HAS_SINGULARITY)"/>
             <attr name="RANK" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="1+RequestGPUs"/>
          </attrs>
          <files>
             <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
                <untar_options cond_attr="TRUE"/>
             </file>
-            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+            <file absfname="/opt/osg-flock/node-check/advertise-singularity-vars" after_entry="True" const="True" executable="True" period="0" wrapper="False"/>
+            <file absfname="/opt/osg-flock/job-wrappers/simple-job-wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN+PS_" untar="False" wrapper="True">
                <untar_options cond_attr="TRUE"/>
             </file>
          </files>
@@ -187,19 +195,18 @@
             <running_glideins_total curb="90000" max="100000"/>
          </config>
          <match match_expr="True" start_expr="(is_itb)">
-            <factory query_expr='stringListMember("VIRGO", GLIDEIN_Supported_VOs) &amp;&amp; (FactoryType == "OSG-ITB" || FactoryType == "CERN-ITB")'>
+            <factory query_expr='stringListMember("VIRGO", GLIDEIN_Supported_VOs) &amp;&amp; (FactoryType == "OSG-ITB")'>
                <match_attrs>
                </match_attrs>
                <collectors>
 		  <collector DN="/DC=org/DC=incommon/C=US/ST=Wisconsin/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-itb-1.opensciencegrid.org" factory_identity="gfactory@gfactory-itb-1.opensciencegrid.org" my_identity="feligo@gfactory-itb-1.opensciencegrid.org" node="gfactory-itb-1.opensciencegrid.org"/>
-                  <collector DN="/DC=ch/DC=cern/OU=computers/CN=vocms0205.cern.ch" my_identity="feligo@vocms0205.cern.ch" factory_identity="gfactory@vocms0205.cern.ch" node="vocms0205.cern.ch"/>
                </collectors>
             </factory>
             <job query_expr="(!isUndefined(is_itb) &amp;&amp; is_itb)  &amp;&amp; (isUndefined(Virgo) || Virgo=?=True)">
                <match_attrs>
                </match_attrs>
                <schedds>
-                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/OU=UCSD/CN=cabinet-10-10-4.t2.ucsd.edu" fullname="cabinet-10-10-4.t2.ucsd.edu"/>
+                  <schedd DN="/DC=org/DC=incommon/C=US/ST=California/L=La Jolla/O=University of California, San Diego/CN=test-002.t2.ucsd.edu" fullname="test-002.t2.ucsd.edu"/>
                </schedds>
             </job>
          </match>
@@ -246,7 +253,6 @@
                </match_attrs>
                <collectors>
                   <collector DN="/DC=org/DC=incommon/C=US/ST=Wisconsin/L=Madison/O=University of Wisconsin-Madison/OU=OCIS/CN=gfactory-itb-1.opensciencegrid.org" factory_identity="gfactory@gfactory-itb-1.opensciencegrid.org" my_identity="feligo@gfactory-itb-1.opensciencegrid.org" node="gfactory-itb-1.opensciencegrid.org"/>
-                  <collector DN="/DC=ch/DC=cern/OU=computers/CN=vocms0205.cern.ch" my_identity="feligo@vocms0205.cern.ch" factory_identity="gfactory@vocms0205.cern.ch" node="vocms0205.cern.ch"/>
                </collectors>
             </factory>
             <job query_expr="(!isUndefined(is_itb) &amp;&amp; is_itb) &amp;&amp;(RequestGPUs=!=undefined)">
@@ -262,13 +268,22 @@
             </credentials>
          </security>
          <attrs>
-	    <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
+             <attr name="CONDOR_VERSION" glidein_publish="False" job_publish="False" parameter="True" type="string" value="8.9.9"/>
+             <attr name="GLIDEIN_Singularity_Use" glidein_publish="True" job_publish="True" parameter="False" type="string" value="PREFERRED"/>
+            <attr name="GLIDEIN_DEBUG_OPTIONS" glidein_publish="True" job_publish="True" parameter="False" type="string" value="userjob"/>
+            <attr name="GLIDEIN_DEBUG_OUTPUT" glidein_publish="True" job_publish="True" parameter="False" type="string" value="true"/>
+            <attr name="SINGULARITY_JOB" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="$(HAS_SINGULARITY)"/>
+            <attr name="SINGULARITY_IS_SETUID" glidein_publish="True" job_publish="False" parameter="True" type="expr" value='($(GWMS_SINGULARITY_MODE)=?="privileged") ? true: false'/>
+            <attr name="SINGULARITY_IMAGE_EXPR" glidein_publish="True" job_publish="False" parameter="True" type="expr" value='!isUndefined(TARGET.SingularityImage) ? TARGET.SingularityImage : "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-el7:latest"'/>
+            <attr name="SINGULARITY_BIND_EXPR" glidein_publish="True" job_publish="False" parameter="True" type="string" value="/cvmfs,/hadoop,/ceph"/>
+            <attr name="SINGULARITY_IGNORE_MISSING_BIND_TARGET" glidein_publish="True" job_publish="False" parameter="True" type="expr" value="$(HAS_SINGULARITY)"/>
          </attrs>
          <files>
             <file absfname="/var/lib/gwms-frontend/web-base/frontend/generic_pre_singularity_setup.sh" after_entry="False" const="True" executable="True" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="False">
                <untar_options cond_attr="TRUE"/>
             </file>
-            <file absfname="/var/lib/gwms-frontend/web-base/frontend/default_singularity_wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN_PS_" untar="False" wrapper="True">
+            <file absfname="/opt/osg-flock/node-check/advertise-singularity-vars" after_entry="True" const="True" executable="True" period="0" wrapper="False"/>
+            <file absfname="/opt/osg-flock/job-wrappers/simple-job-wrapper.sh" after_entry="True" const="True" executable="False" period="0" prefix="GLIDEIN+PS_" untar="False" wrapper="True">
                <untar_options cond_attr="TRUE"/>
             </file>
          </files>
