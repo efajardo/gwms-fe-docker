@@ -5,6 +5,11 @@ metadata:
   namespace: osg-frontends
 spec:
   replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       k8s-app: igwn-frontend
@@ -22,6 +27,11 @@ spec:
                operator: In
                values:
                - ucsd
+           - matchExpressions:
+             - key: kubernetes.io/hostname
+               operator: NotIn
+               values:
+               - suncave-16 
       containers:
       - env:
         - name: VO_POOL
