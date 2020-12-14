@@ -5,6 +5,11 @@ metadata:
   namespace: osg-frontends
 spec:
   replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       k8s-app: jlab-frontend
@@ -28,8 +33,11 @@ spec:
           value: "osg-jlab-1.t2.ucsd.edu, scicollector.jlab.org" 
         - name:  _CONDOR_TOOL_TIMEOUT_MULTIPLIER
           value: "200"
+        - name: GWMS_FE_VS_REPO_1
+          value: https://github.com/opensciencegrid/osg-flock.git
         name: jlab-frontend
-        image: efajardo/gwms-fe-docker:upcoming
+        #image: efajardo/gwms-fe-docker:upcoming
+        image: glideinwms/gwms-frontend:dev
         ports:
         - containerPort: 80 
         volumeMounts:
@@ -47,8 +55,8 @@ spec:
         - mountPath: /etc/gwms-frontend/proxies.ini
           subPath: proxies.ini
           name: proxies-config
-        - mountPath: /etc/gwms-frontend/frontend.xml.k8s
-          subPath: frontend.xml.k8s
+        - mountPath: /etc/gwms-frontend/frontend.xml.base
+          subPath: frontend.xml.base
           name: fexml-config
         resources:
           limits:
@@ -75,7 +83,11 @@ spec:
              name: jlab-proxies-config
         - name: fexml-config
           configMap:
+             defaultMode: 420
              name: jlab-fexml
+             items:
+             - key: frontend.xml.base
+               path: frontend.xml.base
         - name:  eicvomscerts-secret
           secret:
             secretName: eicvomscerts

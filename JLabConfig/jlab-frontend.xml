@@ -36,6 +36,7 @@
          </match_attrs>
          <schedds>
             <schedd DN="/CN=scosg16.jlab.org" fullname="scosg16.jlab.org"/>
+            <schedd DN="/CN=scosg20.jlab.org" fullname="scosg20.jlab.org"/>
          </schedds>
       </job>
    </match>
