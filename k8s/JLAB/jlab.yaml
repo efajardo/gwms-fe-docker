@@ -36,7 +36,6 @@ spec:
         - name: GWMS_FE_VS_REPO_1
           value: https://github.com/opensciencegrid/osg-flock.git
         name: jlab-frontend
-        #image: efajardo/gwms-fe-docker:upcoming
         image: glideinwms/gwms-frontend:dev
         ports:
         - containerPort: 80 

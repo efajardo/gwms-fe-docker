@@ -85,7 +85,6 @@
          </match>
          <security>
             <credentials>
-               <credential absfname="/etc/grid-security/bosco/bosco_key.rsa.pub" keyabsfname="/etc/grid-security/bosco/bosco_key.rsa" pilotabsfname="/etc/grid-security/pilot_atlas_proxy.proxy" security_class="frontend" trust_domain="bosco" type="key_pair"/>
                <credential absfname="/etc/grid-security/pilot_atlas_proxy.proxy" security_class="frontend" trust_domain="grid" type="grid_proxy"/>
             </credentials>
          </security>

@@ -35,10 +35,11 @@ spec:
       containers:
       - env:
         - name: VO_POOL
-          value: "osg-ligo-1.t2.ucsd.edu, condor-osg.ligo.caltech.edu" 
+          value: "osg-ligo-1.t2.ucsd.edu, condor-osg.ligo.caltech.edu"
+        - name: GWMS_FE_VS_REPO_1
+          value: https://github.com/opensciencegrid/osg-flock.git
         name: igwn-frontend
-        image: efajardo/gwms-fe-docker:upcoming
-        #image: efajardo/gwms-fe-docker:latest
+        image: glideinwms/gwms-frontend:dev
         ports:
         - containerPort: 80 
         volumeMounts:
@@ -53,8 +54,8 @@ spec:
         - mountPath: /etc/gwms-frontend/proxies.ini
           subPath: proxies.ini
           name: proxies-config
-        - mountPath: /etc/gwms-frontend/frontend.xml.k8s
-          subPath: frontend.xml.k8s
+        - mountPath: /etc/gwms-frontend/frontend.xml.base
+          subPath: frontend.xml.base
           name: fexml-config
         resources:
           limits:
@@ -71,10 +72,13 @@ spec:
         - name: proxycerts-secret
           secret:
             secretName: igwnproxycerts
-            defaultMode: 0600      #Right File Permissions so can only be read by one node.
+            defaultMode: 0600
         - name: fexml-config
           configMap:
              name: igwn-fexml
+             items:
+             - key: frontend.xml.k8s
+               path: frontend.xml.base
         - name:  vomscerts-secret
           secret:
             secretName: osgvomscerts

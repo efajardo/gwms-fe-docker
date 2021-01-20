@@ -18,7 +18,7 @@ gluex:
 	-kubectl delete secret gluexproxycerts -n osg-frontends
 	-kubectl create secret generic gluexproxycerts --from-file=frontendkey.pem=../gluex-pilot-certs/hostkey.pem  --from-file=frontendcert.pem=../gluex-pilot-certs/hostcert.pem -n osg-frontends
 	-kubectl delete configmap gluex-fexml -n osg-frontends
-	-kubectl create configmap gluex-fexml --from-file=frontend.xml.k8s=GluexConfig/gluex-frontend.xml -n osg-frontends
+	-kubectl create configmap gluex-fexml --from-file=frontend.xml.base=GluexConfig/gluex-frontend.xml -n osg-frontends
 	-kubectl delete configmap gluex-proxies-config -n osg-frontends
 	-kubectl create configmap gluex-proxies-config --from-file=proxies.ini=GluexConfig/gluex-proxies.ini -n osg-frontends
 
@@ -34,8 +34,6 @@ igwn:
 uclhc:
 	-kubectl delete secret uclhcproxycerts -n osg-frontends
 	-kubectl create secret generic uclhcproxycerts --from-file=frontendkey.pem=../uclhccerts/hostkey.pem --from-file=frontendcert.pem=../uclhccerts/hostcert.pem -n osg-frontends
-	-kubectl delete secret ucibosco -n osg-frontends
-	-kubectl create secret generic ucibosco --from-file=bosco_key.rsa.pub=../uciBosco/bosco_key.rsa.pub --from-file=bosco_key.rsa=../uciBosco/bosco_key.rsa -n osg-frontends
 	-kubectl delete configmap uclhc-fexml -n osg-frontends
 	-kubectl create configmap uclhc-fexml --from-file=frontend.xml.k8s=UCLHCConfig/frontend.xml -n osg-frontends
 	-kubectl delete configmap uclhc-proxies-config -n osg-frontends
